@@ -1,0 +1,52 @@
+/*
+  Theme Name: Imperial
+  Theme URL: https://bootstrapmade.com/imperial-free-onepage-bootstrap-template/
+  Author: BootstrapMade
+  Author URL: https://bootstrapmade.com
+*/
+/*--------------------------------------------------------------
+# General
+--------------------------------------------------------------*/
+
+@font-face{font-family:IRANSans;font-style:normal;font-weight:400;src:url('../fonts/Shabnam.eot');src:url('../fonts/Shabnam.eot?#iefix') format("embedded-opentype"),url('../fonts/Shabnam.woff2') format("woff2"),url('../fonts/Shabnam.woff') format("woff"),url('../fonts/Shabnam.ttf') format("truetype")}
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  color: #B0BEC5;
+  display: table;
+  font-weight: 100;
+  font-family: 'IRANSans';
+
+
+}
+
+.container {
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle;
+  background-size: cover;
+  background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url("../images/services-bg.jpg") fixed center center;
+}
+
+.content {
+  text-align: center;
+  display: inline-block;
+
+}
+
+.title {
+  font-size: 156px;
+}
+
+.quote {
+  font-size: 36px;
+}
+
+.explanation {
+  font-size: 24px;
+}
+
+
+
