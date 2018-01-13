@@ -61,6 +61,15 @@ class CategoryCrudController extends CrudController
             'type' => 'text'
         ]);
 
+        $this->crud->addColumn([
+            'name' => 'shop_id',
+            'label' => 'فروشگاه',
+            'type' => 'select',
+            'entity' => 'shop', // the method that defines the relationship in your Model
+            'attribute' => 'name', // foreign key attribute that is shown to user
+            'model' => "App\Models\Shop"// foreign key model
+        ]);
+
 
         $shops = Auth::user()->shops;
         $this->crud->query = $this->crud->query->join('shops','shops.id','categories.shop_id')->join('shop_user','shop_user.shop_id','shops.id')->where('shop_user.user_id',Auth::user()->id)->select('categories.*');
