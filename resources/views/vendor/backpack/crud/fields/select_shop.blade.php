@@ -19,9 +19,7 @@
             @if (isset($field['model']))
                 @foreach ($field['model']::join('shop_user','shop_user.shop_id' , '=' ,'shops.id')->select('shops.*')->where('shop_user.user_id',Auth::user()->id)->get() as $connected_entity_entry)
                     <option value="{{ $connected_entity_entry->getKey() }}"
-
-                        @if ( ( old($field['name']) && old($field['name']) == $connected_entity_entry->getKey() ) || (!old($field['name']) && isset($field['value']) && $connected_entity_entry->getKey()==$field['value']) || Request::get('shop_id') == $connected_entity_entry->getKey())
-
+                        @if ( ( old($field['name']) && old($field['name']) == $connected_entity_entry->getKey() ) || (!old($field['name']) && isset($field['value']) && $connected_entity_entry->getKey()==$field['value']))
                              selected
                         @endif
                     >{{ $connected_entity_entry->{$field['attribute']} }}</option>
@@ -46,6 +44,28 @@
 @push('crud_fields_scripts')
 <!-- include select2 js-->
 <script type="text/javascript">
+
+
+            var elem = document.getElementsByName('category_id');
+            var elem2 = document.getElementsByClassName('cats');
+
+            for (var i = 0; i<elem2.length; i++) {
+            elem2[i].style.display = 'none';
+            }
+
+            for (var i = 0; i<elem.length; i++) {
+            elem[i].style.display = 'none';
+            }
+
+            var e = document.getElementById('shop');
+            var val = e.options[e.selectedIndex].value;
+
+            document.getElementById('cat-' + val).disabled = false;
+            document.getElementById('cat-' + val).style.display = 'block';
+            document.getElementById('cats-' + val).style.display = 'block';
+
+
+
 
 
 
@@ -145,6 +165,26 @@
         document.getElementById('video-' + val).disabled = false;
         document.getElementById('video-' + val).style.display = 'block';
         document.getElementById('videos-' + val).style.display = 'block';
+
+
+
+        for (var i = 0; i<elem2.length; i++) {
+            elem2[i].style.display = 'none';
+        }
+
+
+        for (var i = 0; i<elem.length; i++) {
+            elem[i].style.display = 'none';
+            elem[i].disabled = true;
+        }
+
+
+        document.getElementById('cat-' + val).disabled = false;
+        document.getElementById('cat-' + val).style.display = 'block';
+        document.getElementById('cats-' + val).style.display = 'block';
+
+
+
     }
 </script>
 @endpush

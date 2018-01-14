@@ -29,9 +29,7 @@ class ProductRequest extends \Backpack\CRUD\app\Http\Requests\CrudRequest
              'image' => 'required',
              'description' => 'required',
              'price' => 'required|min:3',
-             'categories' => 'required|array|min:1',
-             'discount_exp' => 'required',
-             'discount_limit' => 'required|numeric|min:1',
+             'category_id' => 'required',
         ];
     }
 

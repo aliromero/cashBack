@@ -52,7 +52,7 @@
 
 {{-- FIELD JS - will be loaded in the after_scripts section --}}
 {{--@push('crud_fields_scripts')--}}
-<!-- include select2 js-->
+{{--<!-- include select2 js-->--}}
 {{--<script type="text/javascript">--}}
 
 

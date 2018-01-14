@@ -51,7 +51,11 @@
     @endif
 </div>
 
-
+@push('crud_fields_styles')
+    <!-- include select2 css-->
+    <link href="{{ asset('vendor/backpack/select2/select2.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('vendor/backpack/select2/select2-bootstrap-dick.css') }}" rel="stylesheet" type="text/css" />
+@endpush
 @push('crud_fields_scripts')
 <!-- include select2 js-->
 <script src="{{ asset('vendor/backpack/select2/select2.min.js') }}"></script>

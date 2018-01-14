@@ -70,15 +70,15 @@ class ProductCrudController extends CrudController
         $this->crud->addField(
             [
                 'label' => 'دسته بندی',
-                'type' => 'select2_multiple',
-                'name' => 'categories', // the method that defines the relationship in your Model
+                'type' => 'cat_select',
+                'name' => 'category_id', // the method that defines the relationship in your Model
                 'entity' => 'categories', // the method that defines the relationship in your Model
                 'attribute' => 'name', // foreign key attribute that is shown to user
                 'wrapperAttributes' => [
                     'class' => 'form-group col-md-8'
                 ],
-                'pivot' => true, // on create&update, do you need to add/delete pivot table entries?
-                'hint' => 'یک یا چند دسته مربوط به محصول خود را انتخاب کنید',
+
+                'hint' => 'یک دسته مربوط به محصول خود را انتخاب کنید',
             ]
         );
 
@@ -169,27 +169,8 @@ class ProductCrudController extends CrudController
         ]);
 
 
-        $this->crud->addField([
-            'name' => 'discount_exp',
-            'label' => 'انقضای تخفیف',
-            'type' => 'datetime_picker_fa',
-            'wrapperAttributes' => [
-                'class' => 'form-group col-md-6'
-            ],
-
-            // optional:
 
 
-        ]);
-
-        $this->crud->addField([
-            'name' => 'discount_limit',
-            'label' => 'تعداد خرید مجاز برای هر نفر',
-            'type' => 'number',
-            'wrapperAttributes' => [
-                'class' => 'form-group col-md-6'
-            ],
-        ]);
 
         $this->crud->addField([
             'name' => 'vote_id',

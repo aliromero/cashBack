@@ -52,38 +52,17 @@ class VideoCrudController extends CrudController
 
 
 
-        $this->crud->enableAjaxTable();
-
-
-
-        $videos = Video::
-        join('shop_user','shop_user.shop_id' , '=' ,'videos.shop_id')
-            ->select('videos.*')
-            ->where('shop_user.user_id',Auth::user()->id)
-            ->get();
-
-        foreach ($videos as $video)
-        {
-            $this->crud->addClause('orWhere', 'shop_id', $video->shop_id);
-
-        }
-
-
-        $shops = Shop::rep()->get();
-
-
-        foreach ($shops as $shop) {
-            $my_shop[$shop['id']] = $shop['name'];
-        }
-
+        $shops = Auth::user()->shops;
+        $this->crud->query = $this->crud->query->join('shops','shops.id','videos.shop_id')->join('shop_user','shop_user.shop_id','shops.id')->where('shop_user.user_id',Auth::user()->id)->select('videos.*');
         $this->crud->addFilter([ // simple filter
             'type' => 'dropdown',
             'name' => 'shop_id',
             'label' => 'فروشگاه'
-        ], $my_shop, function ($value) { // if the filter is active
-            $this->crud->addClause('where', 'shop_id', $value);
+        ], function () use ($shops) {
+            return $shops->pluck('name', 'id')->toArray();
+        }, function ($value) { // if the filter is active
+            $this->crud->addClause('where', 'videos.shop_id', $value);
         });
-
     }
 
     public function store(StoreRequest $request)

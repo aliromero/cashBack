@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api\v1;
 
 use App\Models\Customer;
+use App\Models\Product;
 use Backpack\Settings\app\Models\Setting;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -90,6 +91,12 @@ class ApiController extends Controller
             }
         }
         return $data;
+    }
+
+    public function products($shop_id)
+    {
+        $data['products'] = Product::where('shop_id',$shop_id);
+        return $data['products'];
     }
 
     private function getSetting($key)
