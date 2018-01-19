@@ -188,6 +188,11 @@ return [
         Backpack\Settings\SettingsServiceProvider::class,
 
 
+
+        Intervention\Image\ImageServiceProvider::class,
+
+
+
         /*
          * Application Service Providers...
          */
@@ -248,6 +253,8 @@ return [
         'jDate' => Morilog\Jalali\Facades\jDate::class,
         'Feed' => Roumen\Feed\Feed::class,
         'CRUD'  => Backpack\CRUD\CrudServiceProvider::class,
+        'Image' => Intervention\Image\Facades\Image::class
+
 
 
     ],

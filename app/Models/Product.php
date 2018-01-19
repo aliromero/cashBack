@@ -80,15 +80,22 @@ class Product extends Model
         return $this->belongsToMany(Photo::class);
     }
 
-    public function shop()
+    public function video()
     {
-        return $this->belongsTo(Shop::class);
+        return $this->belongsTo(Video::class);
     }
 
     public function vote()
     {
         return $this->belongsTo(Vote::class);
     }
+
+    public function shop()
+    {
+        return $this->belongsTo(Shop::class);
+    }
+
+
 
 
     /*

@@ -25,6 +25,7 @@ Route::get('/get_area', 'HomeController@get_area');
 Route::get('shops', 'HomeController@shops');
 Route::get('products/{shop?}', 'HomeController@products');
 Route::get('product/{id}', 'HomeController@product');
+Route::get('media/{w_h}/r/{src}', 'api\v1\ApiController@getImage')->where('src', '.*');
 
 Route::group(['prefix' => config('backpack.base.route_prefix', 'admin'), 'middleware' => ['web', 'auth']], function () {
    
@@ -40,6 +41,7 @@ Route::group(['prefix' => config('backpack.base.route_prefix', 'admin'), 'middle
     CRUD::resource('user', 'Admin\UserCrudController');
     Route::post('product/upload_images', 'Admin\ProductCrudController@ajaxUploadImages');
     Route::post('product/delete_image', 'Admin\ProductCrudController@ajaxDeleteImage');
+
 
 });
 
