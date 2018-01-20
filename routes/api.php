@@ -21,7 +21,7 @@ Route::group(['prefix' => 'v1'], function () {
     Route::post('first_register', 'api\v1\ApiController@FirstClientRegister');
     Route::post('login', 'api\v1\ApiController@ClientLogin');
     Route::get('shops/', 'api\v1\ApiController@getShops');
-    Route::get('shop-data/{shop_id}', 'api\v1\ApiController@getProducts');
+    Route::get('shop-data/{shop_id}/{customer_id?}', 'api\v1\ApiController@getProducts');
     Route::get('products/{shop_id}', 'api\v1\ApiController@getProducts');
     Route::post('addToCart/{product_id}', 'api\v1\ApiController@addCart');
     Route::get('carts/{customer_id}/{status}', 'api\v1\ApiController@carts');

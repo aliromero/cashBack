@@ -112,9 +112,16 @@ class ApiController extends Controller
 
     public function getProducts($shop_id,$customer_id)
     {
-        $customer = Customer::find($customer_id);
+
+
         $data['shop'] = Shop::find($shop_id);
-        $data['shop']['is_favorite'] = $customer->
+        if($customer_id != null && $customer_id != 0) {
+            $customer = Customer::find($customer_id);
+            $data['shop']['is_favorite'] = ($customer->fav_shops()->where('shop_id',$shop_id)->get()->count() > 0) ? true : false;
+        } else {
+            $data['shop']['is_favorite'] = false;
+
+        }
         $data['categories'] = Category::where('shop_id', $shop_id)->limit(20)->get();
 
         $i = 0;
@@ -239,9 +246,16 @@ class ApiController extends Controller
 
     public function setFavorite(Request $request)
     {
+
         $customer = Customer::find($request->customer_id);
         $shop = Shop::find($request->shop_id);
-        $customer->fav_shops()->save($shop);
+        $is_favorite = ($customer->fav_shops()->where('shop_id',$shop->id)->get()->count() > 0) ? true : false;
+        if($is_favorite) {
+            $customer->fav_shops()->detach($shop->id);
+        } else {
+            $customer->fav_shops()->attach($shop->id);
+        }
+
         $data['status'] = true;
         return $data;
     }
