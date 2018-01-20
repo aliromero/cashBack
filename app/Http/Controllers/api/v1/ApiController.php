@@ -110,9 +110,11 @@ class ApiController extends Controller
         return $data;
     }
 
-    public function getProducts($shop_id)
+    public function getProducts($shop_id,$customer_id)
     {
+        $customer = Customer::find($customer_id);
         $data['shop'] = Shop::find($shop_id);
+        $data['shop']['is_favorite'] = $customer->
         $data['categories'] = Category::where('shop_id', $shop_id)->limit(20)->get();
 
         $i = 0;
