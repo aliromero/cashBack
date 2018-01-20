@@ -174,7 +174,6 @@ class ApiController extends Controller
     public function carts($customer_id, $status)
     {
 
-
         $carts = Cart::join('products', 'products.id', '=', 'carts.product_id')->where('carts.status', strtoupper($status))->where('carts.customer_id', $customer_id)->selectRaw('products.name ,products.price * carts.qty as price , carts.*')->paginate(20);
         return $carts;
     }
@@ -233,6 +232,22 @@ class ApiController extends Controller
         return $image;
 
 
+    }
+
+
+    public function setFavorite(Request $request)
+    {
+        $customer = Customer::find($request->customer_id);
+        $shop = Shop::find($request->shop_id);
+        $customer->fav_shops()->save($shop);
+        $data['status'] = true;
+        return $data;
+    }
+
+    public function test($customer_id)
+    {
+        $customer = Customer::find($customer_id);
+        return $customer->fav_shops;
     }
 
     public function getImage($w_h, $url)

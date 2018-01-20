@@ -23,6 +23,11 @@ class Customer extends Model
     // protected $hidden = [];
     // protected $dates = [];
 
+
+    public function fav_shops()
+    {
+        return $this->belongsToMany(Shop::class);
+    }
     /*
     |--------------------------------------------------------------------------
     | FUNCTIONS

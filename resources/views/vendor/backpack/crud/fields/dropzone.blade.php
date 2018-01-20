@@ -31,7 +31,7 @@
 
 
         <input type="text" id="all_images" name="all_images"
-               value="@foreach($entry->photos as $photo){{ $photo->photo }},@endforeach" class="hidden"/>
+               value="@foreach($entry->photos as $photo){{ $photo->photo }}<?php if(!$loop->last) { echo ",";} ?>@endforeach" class="hidden"/>
     @endif
 @else
     <input type="text" id="all_images" name="all_images" value="{{ old('all_images') ? old('all_images') : '' }}" class="hidden"/>
@@ -105,6 +105,7 @@
                 });
 
 
+        $('.dropzone').empty();
         for (i = 0; i < longWords.length; i++) {
             $('.dropzone').append('<div class="dz-preview" data-id="' + i + '" data-path="' + longWords[i] + '"><img class="dropzone-thumbnail" src="{{ url('uploads') }}/' + longWords[i] + '" /><a class="dz-remove" href="javascript:void(0);" data-remove="' + i + '" data-path="' + longWords[i] + '">حذف</a></div>');
             addField(longWords[i], i);

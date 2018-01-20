@@ -96,14 +96,14 @@ class HomeController extends Controller
         // Has ShopID
         if ($shopId != null) {
             $shop = Shop::findOrFail($shopId);
-            $categories = Product::join('category_product', 'category_product.product_id', '=', 'products.id')
-                ->join('categories', 'categories.id', '=', 'category_product.category_id')
-                ->groupBy('category_product.category_id')
+            $categories = Product::
+                join('categories', 'categories.id', '=', 'products.category_id')
+                ->groupBy('products.category_id')
                 ->where([
                     ['products.shop_id', $shopId],
                     ['products.status', 1]
                 ])
-                ->select(['category_product.category_id', DB::raw('count(category_product.category_id) as category_count'), 'categories.name'])
+                ->select(['products.category_id', DB::raw('count(products.category_id) as category_count'), 'categories.name'])
                 ->get();
 
             $tags = Product::join('product_tag', 'product_tag.product_id', '=', 'products.id')
@@ -118,13 +118,13 @@ class HomeController extends Controller
         }
         // ShopID IS Null
         else {
-            $categories = Product::join('category_product', 'category_product.product_id', '=', 'products.id')
-                ->join('categories', 'categories.id', '=', 'category_product.category_id')
-                ->groupBy('category_product.category_id')
+            $categories = Product::
+                 join('categories', 'categories.id', '=', 'products.category_id')
+                ->groupBy('products.category_id')
                 ->where([
                     ['products.status', 1]
                 ])
-                ->select(['category_product.category_id', DB::raw('count(category_product.category_id) as category_count'), 'categories.name'])
+                ->select(['products.category_id', DB::raw('count(products.category_id) as category_count'), 'categories.name'])
                 ->get();
             $tags = Product::join('product_tag', 'product_tag.product_id', '=', 'products.id')
                 ->join('tags', 'tags.id', '=', 'product_tag.tag_id')
@@ -152,12 +152,12 @@ class HomeController extends Controller
         }
         // Has ShopId And category
         else if ($shopId != null && $request->has('category_id')) {
-            $products = Product::join('category_product', 'category_product.product_id', '=', 'products.id')
+            $products = Product::join('categories', 'categories.id', '=', 'products.category_id')
                 ->groupBy('products.id')
                 ->where([
                     ['products.shop_id', $shopId],
                     ['products.status', 1],
-                    ['category_product.category_id', $request->get('category_id')]
+                    ['products.category_id', $request->get('category_id')]
                 ])
                 ->select(['products.*'])
                 ->paginate($paginate);
@@ -167,7 +167,7 @@ class HomeController extends Controller
 
         // Has ShopId And Search
         else if ($shopId != null && $request->has('term')) {
-            $products = Product::join('category_product', 'category_product.product_id', '=', 'products.id')
+            $products = Product::  join('categories', 'categories.id', '=', 'products.category_id')
                 ->groupBy('products.id')
                 ->where([
                     ['products.shop_id', $shopId],
@@ -183,11 +183,11 @@ class HomeController extends Controller
         //Shop ID & TagId Is Null CategoryId Not Null
         else if ($shopId == null && $request->has('category_id')) {
 
-            $products = Product::join('category_product', 'category_product.product_id', '=', 'products.id')
+            $products = Product::  join('categories', 'categories.id', '=', 'products.category_id')
                 ->groupBy('products.id')
                 ->where([
                     ['products.status', 1],
-                    ['category_product.category_id', $request->get('category_id')]
+                    ['products.category_id', $request->get('category_id')]
                 ])
                 ->select(['products.*'])
                 ->paginate($paginate);
@@ -209,7 +209,7 @@ class HomeController extends Controller
         // Shop Id Is Null And Search
         else if ($shopId == null && $request->has('term')) {
 
-            $products = Product::join('category_product', 'category_product.product_id', '=', 'products.id')
+            $products = Product::  join('categories', 'categories.id', '=', 'products.category_id')
                 ->groupBy('products.id')
                 ->where([
                     ['products.status', 1],

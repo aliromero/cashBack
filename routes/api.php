@@ -27,6 +27,8 @@ Route::group(['prefix' => 'v1'], function () {
     Route::get('carts/{customer_id}/{status}', 'api\v1\ApiController@carts');
     Route::get('shopsPending/{customer_id}', 'api\v1\ApiController@shopsPending');
     Route::post('saveFactor', 'api\v1\ApiController@saveFactor');
+    Route::post('setFavorite', 'api\v1\ApiController@setFavorite');
+    Route::get('test/{customer_id}', 'api\v1\ApiController@test');
 
 });
 

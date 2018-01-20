@@ -165,11 +165,11 @@
                             <div class="post-categories">
                                 <span><i class="fa fa-list"></i> دسته بندی : </span>
                                 <ul>
-                                    @foreach($product->categories as $category)
+
                                         <li>
-                                            <a href="{{ url("products?category_id={$category->id}") }}">{{ $category->name }}</a>
+                                            <a href="{{ url("products?category_id={$product->category_id}") }}">{{ $product->category->name }}</a>
                                         </li>
-                                    @endforeach
+
                                 </ul>
                             </div>
                             <div class="description">
