@@ -29,6 +29,9 @@ Route::group(['prefix' => 'v1'], function () {
     Route::post('saveFactor', 'api\v1\ApiController@saveFactor');
     Route::post('setFavorite', 'api\v1\ApiController@setFavorite');
     Route::get('test/{customer_id}', 'api\v1\ApiController@test');
+    Route::get('shopArchive', 'api\v1\ApiController@shops');
+    Route::get('shopsNear/{lat}/{lng}', 'api\v1\ApiController@shopsNear');
+    Route::post('removeCart/{cart_id}', 'api\v1\ApiController@removeCart');
 
 });
 

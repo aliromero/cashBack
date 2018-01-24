@@ -13,6 +13,7 @@ use Backpack\Settings\app\Models\Setting;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Intervention\Image\Facades\Image;
@@ -183,7 +184,7 @@ class ApiController extends Controller
     public function carts($customer_id, $status)
     {
 
-        $carts = Cart::join('products', 'products.id', '=', 'carts.product_id')->where('carts.status', strtoupper($status))->where('carts.customer_id', $customer_id)->selectRaw('products.name ,products.price * carts.qty as price , carts.*')->paginate(20);
+        $carts = Cart::join('products', 'products.id', '=', 'carts.product_id')->where('carts.status', strtoupper($status))->where('carts.customer_id', $customer_id)->selectRaw('products.name ,products.price * carts.qty as price , carts.*')->orderByDesc('updated_at')->paginate(40);
         return $carts;
     }
 
@@ -209,6 +210,29 @@ class ApiController extends Controller
             $i++;
         }
 
+        return $data['shops'];
+    }
+
+    public function removeCart($cart_id,Request $request)
+    {
+        $customer_id = $request->customer_id;
+        $cart = Cart::where('id',$cart_id)->where('customer_id' , $customer_id);
+        $cart->delete();
+        $data['status'] = true;
+        $data['msg'] = "deleted";
+        return $data;
+    }
+
+    public function shops()
+    {
+        $data['shops'] = Shop::paginate(40);
+        return $data['shops'];
+    }
+
+    public function shopsNear($lat,$lng)
+    {
+        $distance = $this->getSetting('distance_range');
+        $data['shops'] = Shop::select(DB::raw("ROUND( 6371000 * acos( cos( radians({$lat}) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians({$lng}) ) + sin( radians({$lat}) ) * sin( radians( latitude ) ) ) ,0) AS distance,shops.*"))->whereRaw("ROUND( 6371000 * acos( cos( radians({$lat}) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians({$lng}) ) + sin( radians({$lat}) ) * sin( radians( latitude ) ) ) ,0) < {$distance}")->paginate(40);
         return $data['shops'];
     }
 
