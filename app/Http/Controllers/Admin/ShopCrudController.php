@@ -154,6 +154,12 @@ class ShopCrudController extends CrudController
             'type' => 'checkbox',
         ]);
 
+        $this->crud->addField([
+            'name' => 'show_tell',
+            'label' => 'نمایش شماره تماس برای کابران',
+            'type' => 'checkbox',
+        ]);
+
 
         $this->crud->addColumn([
             'name' => 'name',

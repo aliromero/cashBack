@@ -7,6 +7,7 @@ use App\Models\Banner;
 use App\Models\Category;
 use App\Models\Customer;
 use App\Models\Factor;
+use App\Models\Message;
 use App\Models\Product;
 use App\Models\Shop;
 use Backpack\Settings\app\Models\Setting;
@@ -221,6 +222,12 @@ class ApiController extends Controller
         $data['status'] = true;
         $data['msg'] = "deleted";
         return $data;
+    }
+
+    public function messages()
+    {
+        $data['messages'] = Message::paginate(20);
+        return $data['messages'];
     }
 
     public function shops()

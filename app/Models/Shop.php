@@ -26,7 +26,7 @@ class Shop extends Model
     protected $primaryKey = 'id';
      public $timestamps = true;
     // protected $guarded = ['id'];
-     protected $fillable = ['name','address','tell','logo','latitude','longitude','manager_name','contract_number','contract_src','status'];
+     protected $fillable = ['name','address','tell','logo','latitude','longitude','manager_name','contract_number','contract_src','status','show_tell'];
     // protected $hidden = [];
     // protected $dates = [];
 

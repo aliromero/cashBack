@@ -52,6 +52,15 @@
                 @endif
 
 
+                @if ($user->can('message'))
+                    <li><a href="{{ url(config('backpack.base.route_prefix').'/message') }}"><i
+                                    class="fa fa-envelope"
+                                    aria-hidden="true"></i> <span>ارسال پیام</span></a>
+                    </li>
+                @endif
+
+
+
                 @if ($user->can('category'))
                     <li><a href="{{ url(config('backpack.base.route_prefix').'/category') }}">
                             <i class="fa fa-list"></i> <span>دسته بندی ها</span></a></li>

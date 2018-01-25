@@ -39,6 +39,7 @@ Route::group(['prefix' => config('backpack.base.route_prefix', 'admin'), 'middle
     CRUD::resource('vote', 'Admin\VoteCrudController');
     CRUD::resource('video', 'Admin\VideoCrudController');
     CRUD::resource('user', 'Admin\UserCrudController');
+    CRUD::resource('message', 'Admin\MessageCrudController');
     Route::post('product/upload_images', 'Admin\ProductCrudController@ajaxUploadImages');
     Route::post('product/delete_image', 'Admin\ProductCrudController@ajaxDeleteImage');
 
