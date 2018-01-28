@@ -51,6 +51,14 @@
                     </li>
                 @endif
 
+                @if ($user->can('cart'))
+                    <li><a href="{{ url(config('backpack.base.route_prefix').'/cart') }}"><i
+                                    class="fa fa-shopping-bag"
+                                    aria-hidden="true"></i> <span>سبدهای خرید</span></a>
+                    </li>
+                @endif
+
+
 
                 @if ($user->can('message'))
                     <li><a href="{{ url(config('backpack.base.route_prefix').'/message') }}"><i

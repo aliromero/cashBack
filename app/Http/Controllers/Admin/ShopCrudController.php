@@ -7,6 +7,7 @@ use Backpack\CRUD\app\Http\Controllers\CrudController;
 // VALIDATION: change the requests to match your own file names if you need form validation
 use App\Http\Requests\ShopRequest as StoreRequest;
 use App\Http\Requests\ShopRequest as UpdateRequest;
+use Illuminate\Support\Facades\Auth;
 
 class ShopCrudController extends CrudController
 {
@@ -171,7 +172,10 @@ class ShopCrudController extends CrudController
 
         $this->crud->addButtonFromModelFunction('line', 'reports', 'getReportsButton', 'beginning');
         $this->crud->addButtonFromModelFunction('line', 'factors', 'getFactorsButton', 'beginning');
-        $this->crud->enableAjaxTable();
+
+
+        $this->crud->query = $this->crud->query->join('shop_user','shop_user.shop_id','shops.id')->where('shop_user.user_id',Auth::user()->id)->select('shops.*');
+
 
 
 

@@ -205,6 +205,13 @@ class ProductCrudController extends CrudController
 
 
         $this->crud->addColumn([
+            'name' => 'id',
+            'label' => 'کد محصول',
+            'type' => 'number',
+
+        ]);
+
+        $this->crud->addColumn([
             'name' => 'name',
             'label' => 'نام محصول',
             'type' => 'text'

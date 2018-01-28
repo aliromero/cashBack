@@ -157,9 +157,11 @@ class ApiController extends Controller
                 } else {
                     $cart = new Cart;
                     $cart->product_id = $product_id;
+                    $cart->title = $product->title;
                     $cart->customer_id = $customer->id;
                     $cart->shop_id = $product->shop_id;
                     $cart->qty = $request->qty;
+                    $cart->price = $product->price * $request->qty;
                     if ($request->vote_id != null) {
                         $cart->vote_id = $request->vote_id;
                         $cart->vote_p = $request->vote_p;
